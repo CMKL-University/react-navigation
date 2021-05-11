@@ -21,7 +21,9 @@ import type {
 
 type Props = DefaultNavigatorOptions<StackNavigationOptions> &
   StackRouterOptions &
-  StackNavigationConfig;
+  StackNavigationConfig & {
+    pointerEvents?: 'auto' | 'none' | 'box-none' | 'box-only';
+  };
 
 function StackNavigator({
   initialRouteName,

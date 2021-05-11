@@ -27,6 +27,8 @@ type Props = StackNavigationConfig & {
   state: StackNavigationState<ParamListBase>;
   navigation: StackNavigationHelpers;
   descriptors: StackDescriptorMap;
+
+  pointerEvents?: 'auto' | 'none' | 'box-none' | 'box-only';
 };
 
 type State = {
@@ -437,6 +439,7 @@ export default class StackView extends React.Component<Props, State> {
       headerMode = mode === 'card' && Platform.OS === 'ios'
         ? 'float'
         : 'screen',
+      pointerEvents = 'auto',
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       descriptors: _,
       ...rest
@@ -451,7 +454,10 @@ export default class StackView extends React.Component<Props, State> {
 
     return (
       <NavigationHelpersContext.Provider value={navigation}>
-        <GestureHandlerWrapper style={styles.container}>
+        <GestureHandlerWrapper
+          style={styles.container}
+          pointerEvents={pointerEvents}
+        >
           <SafeAreaProviderCompat>
             <SafeAreaConsumer>
               {(insets) => (
