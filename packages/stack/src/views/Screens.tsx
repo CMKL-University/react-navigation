@@ -51,7 +51,7 @@ export const MaybeScreenContainer = ({
     );
   }
 
-  return <View {...rest} />;
+  return <View pointerEvents="box-none" {...rest} />;
 };
 
 export const MaybeScreen = ({

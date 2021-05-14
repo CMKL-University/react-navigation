@@ -241,8 +241,8 @@ function CardContainer({
         StyleSheet.absoluteFill,
       ]}
     >
-      <View style={styles.container}>
-        <View style={styles.scene}>
+      <View style={styles.container} pointerEvents="box-none">
+        <View style={styles.scene} pointerEvents="box-none">
           <PreviousSceneContext.Provider value={previousScene}>
             <HeaderShownContext.Provider
               value={isParentHeaderShown || isCurrentHeaderShown}

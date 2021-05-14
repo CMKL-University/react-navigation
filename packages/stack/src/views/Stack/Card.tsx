@@ -534,6 +534,7 @@ export default class Card extends React.Component<Props> {
           }}
           // Make sure that this view isn't removed. If this view is removed, our style with animated value won't apply
           collapsable={false}
+          pointerEvents="box-none"
         />
         <View pointerEvents="box-none" {...rest}>
           {overlayEnabled ? (
@@ -552,7 +553,7 @@ export default class Card extends React.Component<Props> {
               onHandlerStateChange={this.handleGestureStateChange}
               {...this.gestureActivationCriteria()}
             >
-              <Animated.View style={[styles.container, cardStyle]}>
+              <Animated.View style={[styles.container, cardStyle]} pointerEvents="box-none">
                 {shadowEnabled && shadowStyle && !isTransparent ? (
                   <Animated.View
                     style={[

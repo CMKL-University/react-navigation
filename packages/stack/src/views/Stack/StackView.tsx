@@ -116,8 +116,8 @@ export default class StackView extends React.Component<Props, State> {
     let routes =
       props.state.index < props.state.routes.length - 1
         ? // Remove any extra routes from the state
-          // The last visible route should be the focused route, i.e. at current index
-          props.state.routes.slice(0, props.state.index + 1)
+        // The last visible route should be the focused route, i.e. at current index
+        props.state.routes.slice(0, props.state.index + 1)
         : props.state.routes;
 
     // Now we need to determine which routes were added and removed
@@ -349,8 +349,8 @@ export default class StackView extends React.Component<Props, State> {
       this.setState((state) => ({
         routes: state.replacingRouteKeys.length
           ? state.routes.filter(
-              (r) => !state.replacingRouteKeys.includes(r.key)
-            )
+            (r) => !state.replacingRouteKeys.includes(r.key)
+          )
           : state.routes,
         openingRouteKeys: state.openingRouteKeys.filter(
           (key) => key !== route.key
@@ -454,49 +454,51 @@ export default class StackView extends React.Component<Props, State> {
 
     return (
       <NavigationHelpersContext.Provider value={navigation}>
-        <GestureHandlerWrapper
-          style={styles.container}
-          pointerEvents={pointerEvents}
-        >
-          <SafeAreaProviderCompat>
-            <SafeAreaConsumer>
-              {(insets) => (
-                <KeyboardManager enabled={keyboardHandlingEnabled !== false}>
-                  {(props) => (
-                    <HeaderShownContext.Consumer>
-                      {(isParentHeaderShown) => (
-                        <CardStack
-                          mode={mode}
-                          insets={insets as EdgeInsets}
-                          isParentHeaderShown={isParentHeaderShown}
-                          getPreviousRoute={this.getPreviousRoute}
-                          getGesturesEnabled={this.getGesturesEnabled}
-                          routes={routes}
-                          openingRouteKeys={openingRouteKeys}
-                          closingRouteKeys={closingRouteKeys}
-                          onOpenRoute={this.handleOpenRoute}
-                          onCloseRoute={this.handleCloseRoute}
-                          onTransitionStart={this.handleTransitionStart}
-                          onTransitionEnd={this.handleTransitionEnd}
-                          renderHeader={this.renderHeader}
-                          renderScene={this.renderScene}
-                          headerMode={headerMode}
-                          state={state}
-                          descriptors={descriptors}
-                          onGestureStart={this.handleGestureStart}
-                          onGestureEnd={this.handleGestureEnd}
-                          onGestureCancel={this.handleGestureCancel}
-                          {...rest}
-                          {...props}
-                        />
-                      )}
-                    </HeaderShownContext.Consumer>
-                  )}
-                </KeyboardManager>
-              )}
-            </SafeAreaConsumer>
-          </SafeAreaProviderCompat>
-        </GestureHandlerWrapper>
+        <View style={styles.container} pointerEvents="box-none">
+          {/* <GestureHandlerWrapper
+            style={styles.container}
+            pointerEvents={pointerEvents}
+          > */}
+            <SafeAreaProviderCompat>
+              <SafeAreaConsumer>
+                {(insets) => (
+                  <KeyboardManager enabled={keyboardHandlingEnabled !== false}>
+                    {(props) => (
+                      <HeaderShownContext.Consumer>
+                        {(isParentHeaderShown) => (
+                          <CardStack
+                            mode={mode}
+                            insets={insets as EdgeInsets}
+                            isParentHeaderShown={isParentHeaderShown}
+                            getPreviousRoute={this.getPreviousRoute}
+                            getGesturesEnabled={this.getGesturesEnabled}
+                            routes={routes}
+                            openingRouteKeys={openingRouteKeys}
+                            closingRouteKeys={closingRouteKeys}
+                            onOpenRoute={this.handleOpenRoute}
+                            onCloseRoute={this.handleCloseRoute}
+                            onTransitionStart={this.handleTransitionStart}
+                            onTransitionEnd={this.handleTransitionEnd}
+                            renderHeader={this.renderHeader}
+                            renderScene={this.renderScene}
+                            headerMode={headerMode}
+                            state={state}
+                            descriptors={descriptors}
+                            onGestureStart={this.handleGestureStart}
+                            onGestureEnd={this.handleGestureEnd}
+                            onGestureCancel={this.handleGestureCancel}
+                            {...rest}
+                            {...props}
+                          />
+                        )}
+                      </HeaderShownContext.Consumer>
+                    )}
+                  </KeyboardManager>
+                )}
+              </SafeAreaConsumer>
+            </SafeAreaProviderCompat>
+          {/* </GestureHandlerWrapper> */}
+        </View>
       </NavigationHelpersContext.Provider>
     );
   }
