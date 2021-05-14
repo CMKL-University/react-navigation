@@ -44,10 +44,12 @@ function SceneContent({
   isFocused,
   children,
   style,
+  pointerEvents = "box-none"
 }: {
   isFocused: boolean;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  pointerEvents?: 'auto' | 'none' | 'box-none' | 'box-only';
 }) {
   const { colors } = useTheme();
 
@@ -56,6 +58,7 @@ function SceneContent({
       accessibilityElementsHidden={!isFocused}
       importantForAccessibility={isFocused ? 'auto' : 'no-hide-descendants'}
       style={[styles.content, { backgroundColor: colors.background }, style]}
+      pointerEvents={pointerEvents}
     >
       {children}
     </View>
@@ -146,6 +149,7 @@ export default class BottomTabView extends React.Component<Props, State> {
             // @ts-ignore
             enabled={detachInactiveScreens}
             style={styles.container}
+            pointerEvents="box-none"
           >
             {routes.map((route, index) => {
               const descriptor = descriptors[route.key];
@@ -171,6 +175,7 @@ export default class BottomTabView extends React.Component<Props, State> {
                   <SceneContent
                     isFocused={isFocused}
                     style={sceneContainerStyle}
+                    pointerEvents="box-none"
                   >
                     <BottomTabBarHeightContext.Provider value={tabBarHeight}>
                       {descriptor.render()}

@@ -27,14 +27,14 @@ export default function ResourceSavingScene({
     if (shouldUseActivityState) {
       return (
         // @ts-expect-error: there was an `active` prop and no `activityState` in older version and stackPresentation was required
-        <Screen activityState={isVisible ? 2 : 0} style={style} {...rest}>
+        <Screen activityState={isVisible ? 2 : 0} style={style} pointerEvents="box-none" {...rest}>
           {children}
         </Screen>
       );
     } else {
       return (
         // @ts-expect-error: there was an `active` prop and no `activityState` in older version and stackPresentation was required
-        <Screen active={isVisible ? 1 : 0} style={style} {...rest}>
+        <Screen active={isVisible ? 1 : 0} style={style} pointerEvents="box-none" {...rest}>
           {children}
         </Screen>
       );
@@ -51,7 +51,7 @@ export default function ResourceSavingScene({
           styles.container,
           style,
         ]}
-        pointerEvents={isVisible ? 'auto' : 'none'}
+        pointerEvents={isVisible ? 'box-none' : 'none'}
         {...rest}
       >
         {children}
@@ -63,7 +63,7 @@ export default function ResourceSavingScene({
     <View
       style={[styles.container, style]}
       // box-none doesn't seem to work properly on Android
-      pointerEvents={isVisible ? 'auto' : 'none'}
+      pointerEvents={isVisible ? 'box-none' : 'none'}
     >
       <View
         collapsable={false}
@@ -72,7 +72,7 @@ export default function ResourceSavingScene({
           // This is an workaround for a bug where the clipped view never re-appears
           Platform.OS === 'ios' ? !isVisible : true
         }
-        pointerEvents={isVisible ? 'auto' : 'none'}
+        pointerEvents={isVisible ? 'box-none' : 'none'}
         style={isVisible ? styles.attached : styles.detached}
       >
         {children}
